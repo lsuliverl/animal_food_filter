@@ -26,45 +26,81 @@ function App() {
     const listAnimals = animals.map((animal, order) => {
         return <li key={order}>{animal.name}</li>;
     });
-    // const [checkedList, setCheckedList] = useState({
-    //     checkedCarnivore: false,
-    //     checkedHerbivore: false,
-    //     checkedOmnivore: false,
-    // });
-
-    const [checkedCarnivore, setCheckedCarnivore] = useState(false);
+    const [checkedList, setCheckedList] = useState({
+        checkedCarnivore: false,
+        checkedHerbivore: false,
+        checkedOmnivore: false,
+    });
 
     const handleCarnivore = (event) => {
-        setCheckedCarnivore(event.target.checked);
+        setCheckedList(event.target.checked);
         if (event.target.checked) {
+            setCheckedList({ ...checkedList, checkedCarnivore: true });
             const filteredCarnivore = animal.filter((carnivoreAnimal) => carnivoreAnimal.type === "육식");
             setAnimals(filteredCarnivore);
         } else if (!event.target.checked) {
+            setCheckedList({ ...checkedList, checkedCarnivore: false });
             setAnimals(animal);
         }
     };
 
-    const [checkedHerbivore, setCheckedHerbivore] = useState(false);
     const handleHerbivore = (event) => {
-        setCheckedHerbivore(event.target.checked);
+        setCheckedList(event.target.checked);
         if (event.target.checked) {
+            setCheckedList({ ...checkedList, checkedHerbivore: true });
             const filteredHerbivore = animal.filter((herbivoreAnimal) => herbivoreAnimal.type === "초식");
             setAnimals(filteredHerbivore);
         } else if (!event.target.checked) {
+            setCheckedList({ ...checkedList, checkedHerbivore: false });
             setAnimals(animal);
         }
     };
 
-    const [checkedOmnivore, setCheckedOmnivore] = useState(false);
     const handleOmnivore = (event) => {
-        setCheckedOmnivore(event.target.checked);
+        setCheckedList(event.target.checked);
         if (event.target.checked) {
+            setCheckedList({ ...checkedList, checkedOmnivore: true });
             const filteredOmnivore = animal.filter((omnivoreAnimal) => omnivoreAnimal.type === "잡식");
             setAnimals(filteredOmnivore);
         } else if (!event.target.checked) {
+            setCheckedList({ ...checkedList, checkedOmnivore: false });
             setAnimals(animal);
         }
     };
+
+    // const [checkedCarnivore, setCheckedCarnivore] = useState(false);
+
+    // const handleCarnivore = (event) => {
+    //     setCheckedCarnivore(event.target.checked);
+    //     if (event.target.checked) {
+    //         const filteredCarnivore = animal.filter((carnivoreAnimal) => carnivoreAnimal.type === "육식");
+    //         setAnimals(filteredCarnivore);
+    //     } else if (!event.target.checked) {
+    //         setAnimals(animal);
+    //     }
+    // };
+
+    // const [checkedHerbivore, setCheckedHerbivore] = useState(false);
+    // const handleHerbivore = (event) => {
+    //     setCheckedHerbivore(event.target.checked);
+    //     if (event.target.checked) {
+    //         const filteredHerbivore = animal.filter((herbivoreAnimal) => herbivoreAnimal.type === "초식");
+    //         setAnimals(filteredHerbivore);
+    //     } else if (!event.target.checked) {
+    //         setAnimals(animal);
+    //     }
+    // };
+
+    // const [checkedOmnivore, setCheckedOmnivore] = useState(false);
+    // const handleOmnivore = (event) => {
+    //     setCheckedOmnivore(event.target.checked);
+    //     if (event.target.checked) {
+    //         const filteredOmnivore = animal.filter((omnivoreAnimal) => omnivoreAnimal.type === "잡식");
+    //         setAnimals(filteredOmnivore);
+    //     } else if (!event.target.checked) {
+    //         setAnimals(animal);
+    //     }
+    // };
 
     return (
         <>
@@ -76,12 +112,21 @@ function App() {
             <fieldset>
                 <legend>식성</legend>
                 육식
+                <input type="checkbox" checked={checkedList.checkedCarnivore} onChange={handleCarnivore} />
+                초식
+                <input type="checkbox" checked={checkedList.checkedHerbivore} onChange={handleHerbivore} />
+                잡식
+                <input type="checkbox" checked={checkedList.checkedOmnivore} onChange={handleOmnivore} />
+            </fieldset>
+            {/* <fieldset>
+                <legend>식성</legend>
+                육식
                 <input type="checkbox" checked={checkedCarnivore} onChange={handleCarnivore} />
                 초식
                 <input type="checkbox" checked={checkedHerbivore} onChange={handleHerbivore} />
                 잡식
                 <input type="checkbox" checked={checkedOmnivore} onChange={handleOmnivore} />
-            </fieldset>
+            </fieldset> */}
             <ul>{listAnimals}</ul>
         </>
     );
