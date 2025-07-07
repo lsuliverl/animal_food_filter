@@ -3,69 +3,49 @@ import "./App.css";
 import Countting from "./components/Countting";
 
 const animal = [
-    { name: "호랑이", type: "육식" },
-    { name: "토끼", type: "초식" },
-    { name: "기린", type: "초식" },
-    { name: "사자", type: "육식" },
-    { name: "쥐", type: "잡식" },
+    { name: "호랑이", type: "Carnivore" },
+    { name: "토끼", type: "Herbivore" },
+    { name: "기린", type: "Herbivore" },
+    { name: "사자", type: "Carnivore" },
+    { name: "쥐", type: "Omnivore" },
 ];
 
 function App() {
     const [animals, setAnimals] = useState(animal);
 
-    const [checkedList, setCheckedList] = useState([
-        { checkedCarnivore: false, type: "육식" },
-        { checkedHerbivore: false, type: "초식" },
-        { checkedOmnivore: false, type: "잡식" },
-    ]);
+    const [checkedList, setCheckedList] = useState({
+        Carnivore: false,
+        Herbivore: false,
+        Omnivore: false,
+    });
 
     const listAnimals = animals.map((animal, order) => {
         return <li key={order}>{animal.name}</li>;
     });
 
-    const animalsHandle = (food) => {
-        if (checkedList[food]) {
-            checkedList.type[food] = true;
-            const animalsfiltered = animal.filter((animal) => animal.type === food);
-            setAnimals(animalsfiltered);
+    const animalsHandle = (food, event) => {
+        const newCheckedList = {
+            ...checkedList,
+            [food]: event.target.checked,
+        };
+        setCheckedList(newCheckedList);
+
+        const { Carnivore, Herbivore, Omnivore } = newCheckedList;
+
+        if (Carnivore || Herbivore || Omnivore) {
+            setAnimals(
+                animal.filter((animal) => {
+                    return (
+                        (Carnivore && animal.type === "Carnivore") ||
+                        (Herbivore && animal.type === "Herbivore") ||
+                        (Omnivore && animal.type === "Omnivore")
+                    );
+                })
+            );
+        } else {
+            setAnimals(animal);
         }
-        setCheckedList(checkedList);
     };
-
-    // const handleCarnivore = (event) => {
-    //     setCheckedList(event.target.checked);
-    //     if (event.target.checked) {
-    //         const filteredCarnivore = animal.filter((carnivoreAnimal) => carnivoreAnimal.type === "육식");
-    //         setAnimals(filteredCarnivore);
-    //     } else if (!event.target.checked) {
-    //         setCheckedList({ ...checkedList, checkedCarnivore: false });
-    //         setAnimals(animal);
-    //     }
-    // };
-
-    // const handleHerbivore = (event) => {
-    //     setCheckedList(event.target.checked);
-    //     if (event.target.checked) {
-    //         setCheckedList({ ...checkedList, checkedHerbivore: true });
-    //         const filteredHerbivore = animal.filter((herbivoreAnimal) => herbivoreAnimal.type === "초식");
-    //         setAnimals(filteredHerbivore);
-    //     } else if (!event.target.checked) {
-    //         setCheckedList({ ...checkedList, checkedHerbivore: false });
-    //         setAnimals(animal);
-    //     }
-    // };
-
-    // const handleOmnivore = (event) => {
-    //     setCheckedList(event.target.checked);
-    //     if (event.target.checked) {
-    //         setCheckedList({ ...checkedList, checkedOmnivore: true });
-    //         const filteredOmnivore = animal.filter((omnivoreAnimal) => omnivoreAnimal.type === "잡식");
-    //         setAnimals(filteredOmnivore);
-    //     } else if (!event.target.checked) {
-    //         setCheckedList({ ...checkedList, checkedOmnivore: false });
-    //         setAnimals(animal);
-    //     }
-    // };
 
     return (
         <>
@@ -75,11 +55,23 @@ function App() {
             <fieldset>
                 <legend>식성</legend>
                 육식
-                <input type="checkbox" checked={checkedList.checkedCarnivore} onChange={animalsHandle("육식")} />
+                <input
+                    type="checkbox"
+                    checked={checkedList.Carnivore}
+                    onChange={(event) => animalsHandle("Carnivore", event)}
+                />
                 초식
-                <input type="checkbox" checked={checkedList.checkedHerbivore} onChange={animalsHandle("초식")} />
+                <input
+                    type="checkbox"
+                    checked={checkedList.Herbivore}
+                    onChange={(event) => animalsHandle("Herbivore", event)}
+                />
                 잡식
-                <input type="checkbox" checked={checkedList.checkedOmnivore} onChange={animalsHandle("잡식")} />
+                <input
+                    type="checkbox"
+                    checked={checkedList.Omnivore}
+                    onChange={(event) => animalsHandle("Omnivore", event)}
+                />
             </fieldset>
             <ul>{listAnimals}</ul>
         </>
