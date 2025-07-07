@@ -31,8 +31,9 @@
 
 ## 🚀 스크린샷
 
-![앱 실행 화면](./img/스크린샷%202025-07-08%20오전%2012.05.33.png)
-
+<p align = "center">
+<img src = "./img/runScreen.png" width = "600px" height="500px">
+</p>
 ---
 
 ## 🙌 기여
