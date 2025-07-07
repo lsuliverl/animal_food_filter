@@ -1,12 +1,40 @@
-# React + Vite
+# 🐯 Simple React App - Counting & Animal Filter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+이 프로젝트는 **React**를 사용하여 제작한 간단한 연습용 애플리케이션입니다.  
+두 가지 주요 기능을 포함하고 있습니다:
 
-Currently, two official plugins are available:
+1. **숫자 카운팅 기능**  
+   버튼을 클릭하여 숫자를 증가/감소시킬 수 있습니다.  
+   0 이하로 감소하지 않도록 제한됩니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. **동물 필터링 기능**  
+   동물들의 식성(육식/초식/잡식)에 따라 체크박스를 통해 목록을 필터링할 수 있습니다.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ 주요 기능
+
+### 📈 Countting 컴포넌트
+
+-   `+1` 버튼을 클릭하면 숫자가 1씩 증가합니다.
+-   `-1` 버튼을 클릭하면 숫자가 감소하며, 0 이하로 내려가지 않습니다.
+-   React의 `useState`를 사용하여 상태를 관리합니다.
+
+### 🦁 AnimalFilter 컴포넌트
+
+-   여러 동물의 목록이 표시됩니다.
+-   육식, 초식, 잡식 체크박스를 선택하여 원하는 식성의 동물만 볼 수 있습니다.
+-   모든 체크박스를 해제하면 전체 목록이 다시 표시됩니다.
+-   필터 상태도 `useState`로 관리합니다.
+
+---
+
+## 🚀 스크린샷
+
+![앱 실행 화면](./img/스크린샷%202025-07-08%20오전%2012.05.33.png)
+
+---
+
+## 🙌 기여
+
+이 프로젝트는 학습 목적으로 제작되었습니다.
